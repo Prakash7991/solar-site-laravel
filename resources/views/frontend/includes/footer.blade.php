@@ -1,0 +1,111 @@
+
+
+	<!--==================================================-->
+	<!-- Start Solar Panel  Footer  Section -->
+	<!--==================================================--> 
+	 <footer class="footer-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-6">
+					<div class="footer-wiget wow animate__zoomIn">
+						<div class="footer-wiget-log">
+							<a href="index.php"><img src="{{ asset('frontend/assets/images/resource/footer-logo.png')}}" alt=""></a>
+						</div>
+						<div class="footer-wiget-text">
+							<p>We provide professional rooftop solar installations, customized solar solutions, and end-to-end support to help you harness the power of the sun.</p>
+						</div>
+						<div class="footer-wiget-social">
+							<ul>
+								<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>								
+								<li><a href="#"><i class="fab fa-instagram"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="footer-wiget wow animate__slideInDown">
+						<div class="footer-wiget-title">
+							<h4>Industry Sectors</h4>
+						</div>
+						<div class="footer-wiget-menu">
+							<ul>
+								<li><a href="{{ route('front_home_two') }}">Home</a></li>
+								<li><a href="{{ route('front_about') }}">About</a></li>
+								<li><a href="{{ route('front_service') }}"> Services</a></li>
+								<li><a href="{{route('front_project')}}">Blog</a></li>
+								<li><a href="{{route('front_contact')}}">Contact</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="footer-wiget-quick-contanct wow animate__slideInUp">
+						<div class="footer-wiget-title">
+							<h4>Get In Touch</h4>
+						</div>
+						<div class="footer-wiget-contact-menu">
+							<ul>
+								<li> Nagaram, Rampaly Hyd</li>
+								<li>+91 99633 58777</li>
+								<li><a href="#">info@ssres.in</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			
+			</div>
+			<div class="row footer-line">
+				<div class="col-lg-8 col-md-6">
+					<div class="copyright-text wow animate__slideInUp">
+						<p>© 2026 | Alrights reserved by <a href="#">Sky Solar Renewable Energy Solutions PVT LTD</a></p>
+					</div>
+				</div>
+			
+				<div class="col-lg-4 col-md-6">
+					<div class="footer-condition wow animate__slideInDown">
+						<ul>
+							<li><a href="#">Privercy</a></li>
+							<li><a href="#">Term & Conditions</a></li>
+							<li><a href="#">Legal</a></li>
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</footer>
+	<!--==================================================-->
+	<!-- End Solar Panel  Footer  Section -->
+	<!--==================================================--> 
+
+	<!--==================================================-->
+	<!-- Start Search Popup Area -->
+	<!--==================================================-->
+	<div class="search-popup">
+		<button class="close-search style-two"><span class="flaticon-multiply"><i class="far fa-times-circle"></i></span></button>
+		<button class="close-search"><i class="fas fa-arrow-up"></i></button>
+		<form method="post" action="#">
+			<div class="form-group">
+				<input type="search" name="search-field" value="" placeholder="Search Here" required="">
+				<button type="submit"><i class="fa fa-search"></i></button>
+			</div>
+		</form>
+	</div>
+	<!--==================================================-->
+	<!-- End Search Popup Area -->
+	<!--==================================================-->
+
+	<!--==================================================-->
+	<!-- Start scrollup section Area -->
+	<!--==================================================-->
+	<!-- scrollup section -->
+	 <div class="scroll-area">
+		<div class="top-wrap">
+			<div class="go-top-btn-wraper">
+				<div class="go-top go-top-button">
+					<i class="fas fa-arrow-up"></i>
+					<i class="fas fa-arrow-up"></i>
+				</div>
+			</div>
+		</div>
+	</div>
