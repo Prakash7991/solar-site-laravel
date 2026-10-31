@@ -11,7 +11,7 @@
 				<div class="col-lg-6"></div>
 				<div class="col-lg-6 col-md-12">
 					<div class="slider-content style-two wow animate__slideInRight">
-						<h4> Sky Solar Renewable Energy Solutions Pvt Ltd</h4>
+						<h4> Sky Solar Renewable Energy Solutions Pvt</h4>
 						
 						<div class="choose-contact-boxx wow animate__fadeOutDown">
 						<div class="choose-contact-title">
