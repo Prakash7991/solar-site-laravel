@@ -16,51 +16,24 @@ concurrency:
 
 jobs:
   deploy:
-    name: Deploy Laravel to AWS EC2
-    runs-on: [self-hosted, Linux, X64]
+    name: Deploy Laravel to EC2
+    runs-on: [self-hosted, linux, x64]
     timeout-minutes: 30
 
     steps:
-      - name: Checkout Private GitHub Repository
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-
-      - name: Verify EC2 Environment
+      - name: Update Laravel Website
         shell: bash
         run: |
           set -euo pipefail
 
-          test -f /var/www/solar-site/.env
-          test -w /var/www/solar-site
+          cd /var/www/laravel
 
-          command -v rsync
-          command -v php
-          command -v composer
+          test -f .env
+          test -w /var/www/laravel
 
-          echo "EC2 environment ready"
+          export GIT_SSH_COMMAND="ssh -i /home/ubuntu/.ssh/laravel_github -o IdentitiesOnly=yes -o BatchMode=yes"
 
-      - name: Copy Laravel Code to EC2
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          rsync -a \
-            --exclude='.env' \
-            --exclude='.git/' \
-            --exclude='storage/' \
-            --exclude='vendor/' \
-            --exclude='node_modules/' \
-            --exclude='public/storage' \
-            ./ /var/www/solar-site/
-
-          echo "Laravel source files copied"
-
-      - name: Install PHP Dependencies
-        working-directory: /var/www/solar-site
-        shell: bash
-        run: |
-          set -euo pipefail
+          git pull --ff-only origin main
 
           composer install \
             --no-dev \
@@ -68,39 +41,11 @@ jobs:
             --no-interaction \
             --optimize-autoloader
 
-      - name: Build Frontend Assets
-        working-directory: /var/www/solar-site
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          if [ -f package-lock.json ]; then
-            command -v npm >/dev/null || {
-              echo "ERROR: npm is not installed on EC2"
-              exit 1
-            }
-
-            npm ci
-            npm run build
-          else
-            echo "No package-lock.json; skipping npm build"
-          fi
-
-      - name: Refresh Laravel Cache
-        working-directory: /var/www/solar-site
-        shell: bash
-        run: |
-          set -euo pipefail
+          npm ci
+          npm run build
 
           php artisan config:clear
-          php artisan view:clear
           php artisan config:cache
-          php artisan view:cache
-
-      - name: Verify Website
-        shell: bash
-        run: |
-          set -euo pipefail
 
           curl --fail \
             --silent \
@@ -108,11 +53,4 @@ jobs:
             --output /dev/null \
             http://127.0.0.1/
 
-          echo "Website HTTP check successful"
-
-      - name: Deployment Successful
-        shell: bash
-        run: |
-          echo "AWS EC2 Laravel deployment completed"
-          echo "Repository: $GITHUB_REPOSITORY"
-          echo "Commit: $GITHUB_SHA"
+          echo "AWS EC2 Automatic Deployment Successful"
