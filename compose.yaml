@@ -1,0 +1,48 @@
+
+services:
+  app:
+    build: .
+    container_name: solar-laravel-app
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    env_file:
+      - .env
+    environment:
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: solar
+      DB_USERNAME: solar_user
+      DB_PASSWORD: ${DB_PASSWORD}
+      APP_ENV: production
+      APP_DEBUG: "false"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - solar_storage:/var/www/html/storage
+
+  db:
+    image: mariadb:10.11
+    container_name: solar-mariadb
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: solar
+      MARIADB_USER: solar_user
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    command:
+      - --innodb-buffer-pool-size=64M
+      - --max-connections=20
+    volumes:
+      - solar_db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 15s
+      timeout: 5s
+      retries: 12
+
+volumes:
+  solar_db_data:
+  solar_storage:
